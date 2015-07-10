@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="UTF-8"?><OWASPZAPReport generated="Fri, 10 Jul 2015 13:15:02" version="2.4.0">
+<site host="target" name="http://target" port="80" ssl="false"><alerts><alertitem>
+  <pluginid>10016</pluginid>
+  <alert>Web Browser XSS Protection Not Enabled</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>Web Browser XSS Protection is not enabled, or is disabled by the configuration of the 'X-XSS-Protection' HTTP response header on the web server
+	</desc>
+  <uri>http://target/WebGoat/login.mvc</uri>
+  <param/>
+  <attack/>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+X-XSS-Protection: 1; mode=block
+X-XSS-Protection: 1; report=http://www.example.com/xss
+The following values would disable it:
+X-XSS-Protection: 0
+The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).</otherinfo>
+  <solution>Ensure that the web browser's XSS filter is enabled, by setting the X-XSS-Protection HTTP response header to '1'.
+	</solution>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+	X-XSS-Protection: 1; mode=block
+	X-XSS-Protection: 1; report=http://www.example.com/xss
+	The following values would disable it:
+	X-XSS-Protection: 0
+	The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+	Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).
+	</otherinfo>
+  <reference>https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
+	https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/
+	</reference>
+  <cweid>933</cweid>
+  <wascid>14</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10012</pluginid>
+  <alert>Password Autocomplete in browser</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>AUTOCOMPLETE attribute is not disabled in HTML FORM/INPUT element containing password type input.  Passwords may be stored in browsers and retrieved.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc</uri>
+  <param>input</param>
+  <attack/>
+  <evidence>&lt;input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name='password'&gt;</evidence>
+  <otherinfo/>
+  <solution>Turn off AUTOCOMPLETE attribute in form or individual input elements containing password by using AUTOCOMPLETE='OFF'
+	</solution>
+  <reference>http://msdn.microsoft.com/library/default.asp?url=/workshop/author/forms/autocomplete_ovr.asp
+	</reference>
+  <cweid>525</cweid>
+</alertitem>
+<alertitem>
+  <pluginid>10021</pluginid>
+  <alert>X-Content-Type-Options Header Missing</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc</uri>
+  <param/>
+  <attack/>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</otherinfo>
+  <solution>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.
+	If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.
+	</solution>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
+	</otherinfo>
+  <reference>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx
+	https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+	</reference>
+  <wascid>15</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10020</pluginid>
+  <alert>X-Frame-Options Header Not Set</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>X-Frame-Options header is not included in the HTTP response to protect against 'ClickJacking' attacks.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc</uri>
+  <param/>
+  <attack/>
+  <otherinfo/>
+  <solution>Most modern Web browsers support the X-Frame-Options HTTP header. Ensure it's set on all web pages returned by your site (if you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY.  ALLOW-FROM allows specific websites to frame the web page in supported web browsers).
+	</solution>
+  <reference>http://blogs.msdn.com/b/ieinternals/archive/2010/03/30/combating-clickjacking-with-x-frame-options.aspx
+	</reference>
+</alertitem>
+<alertitem>
+  <pluginid>10016</pluginid>
+  <alert>Web Browser XSS Protection Not Enabled</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>Web Browser XSS Protection is not enabled, or is disabled by the configuration of the 'X-XSS-Protection' HTTP response header on the web server
+	</desc>
+  <uri>http://target/WebGoat/images/favicon.ico</uri>
+  <param/>
+  <attack/>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+X-XSS-Protection: 1; mode=block
+X-XSS-Protection: 1; report=http://www.example.com/xss
+The following values would disable it:
+X-XSS-Protection: 0
+The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).</otherinfo>
+  <solution>Ensure that the web browser's XSS filter is enabled, by setting the X-XSS-Protection HTTP response header to '1'.
+	</solution>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+	X-XSS-Protection: 1; mode=block
+	X-XSS-Protection: 1; report=http://www.example.com/xss
+	The following values would disable it:
+	X-XSS-Protection: 0
+	The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+	Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).
+	</otherinfo>
+  <reference>https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
+	https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/
+	</reference>
+  <cweid>933</cweid>
+  <wascid>14</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10021</pluginid>
+  <alert>X-Content-Type-Options Header Missing</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.
+	</desc>
+  <uri>http://target/WebGoat/images/favicon.ico</uri>
+  <param/>
+  <attack/>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</otherinfo>
+  <solution>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.
+	If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.
+	</solution>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
+	</otherinfo>
+  <reference>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx
+	https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+	</reference>
+  <wascid>15</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10020</pluginid>
+  <alert>X-Frame-Options Header Not Set</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>X-Frame-Options header is not included in the HTTP response to protect against 'ClickJacking' attacks.
+	</desc>
+  <uri>http://target/WebGoat/images/favicon.ico</uri>
+  <param/>
+  <attack/>
+  <otherinfo/>
+  <solution>Most modern Web browsers support the X-Frame-Options HTTP header. Ensure it's set on all web pages returned by your site (if you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY.  ALLOW-FROM allows specific websites to frame the web page in supported web browsers).
+	</solution>
+  <reference>http://blogs.msdn.com/b/ieinternals/archive/2010/03/30/combating-clickjacking-with-x-frame-options.aspx
+	</reference>
+</alertitem>
+<alertitem>
+  <pluginid>10016</pluginid>
+  <alert>Web Browser XSS Protection Not Enabled</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>Web Browser XSS Protection is not enabled, or is disabled by the configuration of the 'X-XSS-Protection' HTTP response header on the web server
+	</desc>
+  <uri>http://target/WebGoat/plugins/bootstrap/css/bootstrap.min.css</uri>
+  <param/>
+  <attack/>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+X-XSS-Protection: 1; mode=block
+X-XSS-Protection: 1; report=http://www.example.com/xss
+The following values would disable it:
+X-XSS-Protection: 0
+The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).</otherinfo>
+  <solution>Ensure that the web browser's XSS filter is enabled, by setting the X-XSS-Protection HTTP response header to '1'.
+	</solution>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+	X-XSS-Protection: 1; mode=block
+	X-XSS-Protection: 1; report=http://www.example.com/xss
+	The following values would disable it:
+	X-XSS-Protection: 0
+	The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+	Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).
+	</otherinfo>
+  <reference>https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
+	https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/
+	</reference>
+  <cweid>933</cweid>
+  <wascid>14</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10021</pluginid>
+  <alert>X-Content-Type-Options Header Missing</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.
+	</desc>
+  <uri>http://target/WebGoat/plugins/bootstrap/css/bootstrap.min.css</uri>
+  <param/>
+  <attack/>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</otherinfo>
+  <solution>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.
+	If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.
+	</solution>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
+	</otherinfo>
+  <reference>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx
+	https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+	</reference>
+  <wascid>15</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10020</pluginid>
+  <alert>X-Frame-Options Header Not Set</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>X-Frame-Options header is not included in the HTTP response to protect against 'ClickJacking' attacks.
+	</desc>
+  <uri>http://target/WebGoat/plugins/bootstrap/css/bootstrap.min.css</uri>
+  <param/>
+  <attack/>
+  <otherinfo/>
+  <solution>Most modern Web browsers support the X-Frame-Options HTTP header. Ensure it's set on all web pages returned by your site (if you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY.  ALLOW-FROM allows specific websites to frame the web page in supported web browsers).
+	</solution>
+  <reference>http://blogs.msdn.com/b/ieinternals/archive/2010/03/30/combating-clickjacking-with-x-frame-options.aspx
+	</reference>
+</alertitem>
+<alertitem>
+  <pluginid>10016</pluginid>
+  <alert>Web Browser XSS Protection Not Enabled</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>Web Browser XSS Protection is not enabled, or is disabled by the configuration of the 'X-XSS-Protection' HTTP response header on the web server
+	</desc>
+  <uri>http://target/WebGoat/css/font-awesome.min.css</uri>
+  <param/>
+  <attack/>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+X-XSS-Protection: 1; mode=block
+X-XSS-Protection: 1; report=http://www.example.com/xss
+The following values would disable it:
+X-XSS-Protection: 0
+The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).</otherinfo>
+  <solution>Ensure that the web browser's XSS filter is enabled, by setting the X-XSS-Protection HTTP response header to '1'.
+	</solution>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+	X-XSS-Protection: 1; mode=block
+	X-XSS-Protection: 1; report=http://www.example.com/xss
+	The following values would disable it:
+	X-XSS-Protection: 0
+	The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+	Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).
+	</otherinfo>
+  <reference>https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
+	https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/
+	</reference>
+  <cweid>933</cweid>
+  <wascid>14</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10021</pluginid>
+  <alert>X-Content-Type-Options Header Missing</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.
+	</desc>
+  <uri>http://target/WebGoat/css/font-awesome.min.css</uri>
+  <param/>
+  <attack/>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</otherinfo>
+  <solution>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.
+	If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.
+	</solution>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
+	</otherinfo>
+  <reference>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx
+	https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+	</reference>
+  <wascid>15</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10020</pluginid>
+  <alert>X-Frame-Options Header Not Set</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>X-Frame-Options header is not included in the HTTP response to protect against 'ClickJacking' attacks.
+	</desc>
+  <uri>http://target/WebGoat/css/font-awesome.min.css</uri>
+  <param/>
+  <attack/>
+  <otherinfo/>
+  <solution>Most modern Web browsers support the X-Frame-Options HTTP header. Ensure it's set on all web pages returned by your site (if you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY.  ALLOW-FROM allows specific websites to frame the web page in supported web browsers).
+	</solution>
+  <reference>http://blogs.msdn.com/b/ieinternals/archive/2010/03/30/combating-clickjacking-with-x-frame-options.aspx
+	</reference>
+</alertitem>
+<alertitem>
+  <pluginid>10016</pluginid>
+  <alert>Web Browser XSS Protection Not Enabled</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>Web Browser XSS Protection is not enabled, or is disabled by the configuration of the 'X-XSS-Protection' HTTP response header on the web server
+	</desc>
+  <uri>http://target/WebGoat/css/animate.css</uri>
+  <param/>
+  <attack/>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+X-XSS-Protection: 1; mode=block
+X-XSS-Protection: 1; report=http://www.example.com/xss
+The following values would disable it:
+X-XSS-Protection: 0
+The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).</otherinfo>
+  <solution>Ensure that the web browser's XSS filter is enabled, by setting the X-XSS-Protection HTTP response header to '1'.
+	</solution>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+	X-XSS-Protection: 1; mode=block
+	X-XSS-Protection: 1; report=http://www.example.com/xss
+	The following values would disable it:
+	X-XSS-Protection: 0
+	The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+	Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).
+	</otherinfo>
+  <reference>https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
+	https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/
+	</reference>
+  <cweid>933</cweid>
+  <wascid>14</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10021</pluginid>
+  <alert>X-Content-Type-Options Header Missing</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.
+	</desc>
+  <uri>http://target/WebGoat/css/animate.css</uri>
+  <param/>
+  <attack/>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</otherinfo>
+  <solution>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.
+	If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.
+	</solution>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
+	</otherinfo>
+  <reference>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx
+	https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+	</reference>
+  <wascid>15</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10020</pluginid>
+  <alert>X-Frame-Options Header Not Set</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>X-Frame-Options header is not included in the HTTP response to protect against 'ClickJacking' attacks.
+	</desc>
+  <uri>http://target/WebGoat/css/animate.css</uri>
+  <param/>
+  <attack/>
+  <otherinfo/>
+  <solution>Most modern Web browsers support the X-Frame-Options HTTP header. Ensure it's set on all web pages returned by your site (if you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY.  ALLOW-FROM allows specific websites to frame the web page in supported web browsers).
+	</solution>
+  <reference>http://blogs.msdn.com/b/ieinternals/archive/2010/03/30/combating-clickjacking-with-x-frame-options.aspx
+	</reference>
+</alertitem>
+<alertitem>
+  <pluginid>10016</pluginid>
+  <alert>Web Browser XSS Protection Not Enabled</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>Web Browser XSS Protection is not enabled, or is disabled by the configuration of the 'X-XSS-Protection' HTTP response header on the web server
+	</desc>
+  <uri>http://target/WebGoat/css/main.css</uri>
+  <param/>
+  <attack/>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+X-XSS-Protection: 1; mode=block
+X-XSS-Protection: 1; report=http://www.example.com/xss
+The following values would disable it:
+X-XSS-Protection: 0
+The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).</otherinfo>
+  <solution>Ensure that the web browser's XSS filter is enabled, by setting the X-XSS-Protection HTTP response header to '1'.
+	</solution>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+	X-XSS-Protection: 1; mode=block
+	X-XSS-Protection: 1; report=http://www.example.com/xss
+	The following values would disable it:
+	X-XSS-Protection: 0
+	The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+	Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).
+	</otherinfo>
+  <reference>https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
+	https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/
+	</reference>
+  <cweid>933</cweid>
+  <wascid>14</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10021</pluginid>
+  <alert>X-Content-Type-Options Header Missing</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.
+	</desc>
+  <uri>http://target/WebGoat/css/main.css</uri>
+  <param/>
+  <attack/>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</otherinfo>
+  <solution>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.
+	If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.
+	</solution>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
+	</otherinfo>
+  <reference>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx
+	https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+	</reference>
+  <wascid>15</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10020</pluginid>
+  <alert>X-Frame-Options Header Not Set</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>X-Frame-Options header is not included in the HTTP response to protect against 'ClickJacking' attacks.
+	</desc>
+  <uri>http://target/WebGoat/css/main.css</uri>
+  <param/>
+  <attack/>
+  <otherinfo/>
+  <solution>Most modern Web browsers support the X-Frame-Options HTTP header. Ensure it's set on all web pages returned by your site (if you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY.  ALLOW-FROM allows specific websites to frame the web page in supported web browsers).
+	</solution>
+  <reference>http://blogs.msdn.com/b/ieinternals/archive/2010/03/30/combating-clickjacking-with-x-frame-options.aspx
+	</reference>
+</alertitem>
+<alertitem>
+  <pluginid>10016</pluginid>
+  <alert>Web Browser XSS Protection Not Enabled</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>Web Browser XSS Protection is not enabled, or is disabled by the configuration of the 'X-XSS-Protection' HTTP response header on the web server
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=F319E45FAAD7B9642E60368E3A297BEF</uri>
+  <param/>
+  <attack/>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+X-XSS-Protection: 1; mode=block
+X-XSS-Protection: 1; report=http://www.example.com/xss
+The following values would disable it:
+X-XSS-Protection: 0
+The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).</otherinfo>
+  <solution>Ensure that the web browser's XSS filter is enabled, by setting the X-XSS-Protection HTTP response header to '1'.
+	</solution>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+	X-XSS-Protection: 1; mode=block
+	X-XSS-Protection: 1; report=http://www.example.com/xss
+	The following values would disable it:
+	X-XSS-Protection: 0
+	The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+	Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).
+	</otherinfo>
+  <reference>https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
+	https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/
+	</reference>
+  <cweid>933</cweid>
+  <wascid>14</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10012</pluginid>
+  <alert>Password Autocomplete in browser</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>AUTOCOMPLETE attribute is not disabled in HTML FORM/INPUT element containing password type input.  Passwords may be stored in browsers and retrieved.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=F319E45FAAD7B9642E60368E3A297BEF</uri>
+  <param>input</param>
+  <attack/>
+  <evidence>&lt;input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name='password'&gt;</evidence>
+  <otherinfo/>
+  <solution>Turn off AUTOCOMPLETE attribute in form or individual input elements containing password by using AUTOCOMPLETE='OFF'
+	</solution>
+  <reference>http://msdn.microsoft.com/library/default.asp?url=/workshop/author/forms/autocomplete_ovr.asp
+	</reference>
+  <cweid>525</cweid>
+</alertitem>
+<alertitem>
+  <pluginid>3</pluginid>
+  <alert>Session ID in URL Rewrite</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>URL rewrite is used to track user session ID. The session ID may be disclosed via cross-site referer header. In addition, the session ID might be stored in browser history or server logs.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=F319E45FAAD7B9642E60368E3A297BEF</uri>
+  <param>jsessionid</param>
+  <attack>jsessionid=F319E45FAAD7B9642E60368E3A297BEF</attack>
+  <evidence>jsessionid=F319E45FAAD7B9642E60368E3A297BEF</evidence>
+  <otherinfo/>
+  <solution>For secure content, put session ID in a cookie. To be even more secure consider using a combination of cookie and URL rewrite.
+	</solution>
+  <reference>http://seclists.org/lists/webappsec/2002/Oct-Dec/0111.html
+	</reference>
+  <cweid>200</cweid>
+  <wascid>13</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10021</pluginid>
+  <alert>X-Content-Type-Options Header Missing</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=F319E45FAAD7B9642E60368E3A297BEF</uri>
+  <param/>
+  <attack/>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</otherinfo>
+  <solution>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.
+	If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.
+	</solution>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
+	</otherinfo>
+  <reference>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx
+	https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+	</reference>
+  <wascid>15</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10020</pluginid>
+  <alert>X-Frame-Options Header Not Set</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>X-Frame-Options header is not included in the HTTP response to protect against 'ClickJacking' attacks.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=F319E45FAAD7B9642E60368E3A297BEF</uri>
+  <param/>
+  <attack/>
+  <otherinfo/>
+  <solution>Most modern Web browsers support the X-Frame-Options HTTP header. Ensure it's set on all web pages returned by your site (if you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY.  ALLOW-FROM allows specific websites to frame the web page in supported web browsers).
+	</solution>
+  <reference>http://blogs.msdn.com/b/ieinternals/archive/2010/03/30/combating-clickjacking-with-x-frame-options.aspx
+	</reference>
+</alertitem>
+<alertitem>
+  <pluginid>3</pluginid>
+  <alert>Session ID in URL Rewrite</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>URL rewrite is used to track user session ID. The session ID may be disclosed via cross-site referer header. In addition, the session ID might be stored in browser history or server logs.
+	</desc>
+  <uri>http://target/WebGoat/j_spring_security_check;jsessionid=AB2D37D509EC4E095D7D017234547FB4</uri>
+  <param>jsessionid</param>
+  <attack>jsessionid=AB2D37D509EC4E095D7D017234547FB4</attack>
+  <evidence>jsessionid=AB2D37D509EC4E095D7D017234547FB4</evidence>
+  <otherinfo/>
+  <solution>For secure content, put session ID in a cookie. To be even more secure consider using a combination of cookie and URL rewrite.
+	</solution>
+  <reference>http://seclists.org/lists/webappsec/2002/Oct-Dec/0111.html
+	</reference>
+  <cweid>200</cweid>
+  <wascid>13</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>3</pluginid>
+  <alert>Session ID in URL Rewrite</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>URL rewrite is used to track user session ID. The session ID may be disclosed via cross-site referer header. In addition, the session ID might be stored in browser history or server logs.
+	</desc>
+  <uri>http://target/WebGoat/j_spring_security_check;jsessionid=F319E45FAAD7B9642E60368E3A297BEF</uri>
+  <param>jsessionid</param>
+  <attack>jsessionid=F319E45FAAD7B9642E60368E3A297BEF</attack>
+  <evidence>jsessionid=F319E45FAAD7B9642E60368E3A297BEF</evidence>
+  <otherinfo/>
+  <solution>For secure content, put session ID in a cookie. To be even more secure consider using a combination of cookie and URL rewrite.
+	</solution>
+  <reference>http://seclists.org/lists/webappsec/2002/Oct-Dec/0111.html
+	</reference>
+  <cweid>200</cweid>
+  <wascid>13</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10016</pluginid>
+  <alert>Web Browser XSS Protection Not Enabled</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>Web Browser XSS Protection is not enabled, or is disabled by the configuration of the 'X-XSS-Protection' HTTP response header on the web server
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=AB2D37D509EC4E095D7D017234547FB4?error</uri>
+  <param/>
+  <attack/>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+X-XSS-Protection: 1; mode=block
+X-XSS-Protection: 1; report=http://www.example.com/xss
+The following values would disable it:
+X-XSS-Protection: 0
+The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).</otherinfo>
+  <solution>Ensure that the web browser's XSS filter is enabled, by setting the X-XSS-Protection HTTP response header to '1'.
+	</solution>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+	X-XSS-Protection: 1; mode=block
+	X-XSS-Protection: 1; report=http://www.example.com/xss
+	The following values would disable it:
+	X-XSS-Protection: 0
+	The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+	Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).
+	</otherinfo>
+  <reference>https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
+	https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/
+	</reference>
+  <cweid>933</cweid>
+  <wascid>14</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10012</pluginid>
+  <alert>Password Autocomplete in browser</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>AUTOCOMPLETE attribute is not disabled in HTML FORM/INPUT element containing password type input.  Passwords may be stored in browsers and retrieved.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=AB2D37D509EC4E095D7D017234547FB4?error</uri>
+  <param>input</param>
+  <attack/>
+  <evidence>&lt;input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name='password'&gt;</evidence>
+  <otherinfo/>
+  <solution>Turn off AUTOCOMPLETE attribute in form or individual input elements containing password by using AUTOCOMPLETE='OFF'
+	</solution>
+  <reference>http://msdn.microsoft.com/library/default.asp?url=/workshop/author/forms/autocomplete_ovr.asp
+	</reference>
+  <cweid>525</cweid>
+</alertitem>
+<alertitem>
+  <pluginid>3</pluginid>
+  <alert>Session ID in URL Rewrite</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>URL rewrite is used to track user session ID. The session ID may be disclosed via cross-site referer header. In addition, the session ID might be stored in browser history or server logs.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=AB2D37D509EC4E095D7D017234547FB4?error</uri>
+  <param>jsessionid</param>
+  <attack>jsessionid=AB2D37D509EC4E095D7D017234547FB4?error</attack>
+  <evidence>jsessionid=AB2D37D509EC4E095D7D017234547FB4?error</evidence>
+  <otherinfo/>
+  <solution>For secure content, put session ID in a cookie. To be even more secure consider using a combination of cookie and URL rewrite.
+	</solution>
+  <reference>http://seclists.org/lists/webappsec/2002/Oct-Dec/0111.html
+	</reference>
+  <cweid>200</cweid>
+  <wascid>13</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10021</pluginid>
+  <alert>X-Content-Type-Options Header Missing</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=AB2D37D509EC4E095D7D017234547FB4?error</uri>
+  <param/>
+  <attack/>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</otherinfo>
+  <solution>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.
+	If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.
+	</solution>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
+	</otherinfo>
+  <reference>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx
+	https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+	</reference>
+  <wascid>15</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10020</pluginid>
+  <alert>X-Frame-Options Header Not Set</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>X-Frame-Options header is not included in the HTTP response to protect against 'ClickJacking' attacks.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=AB2D37D509EC4E095D7D017234547FB4?error</uri>
+  <param/>
+  <attack/>
+  <otherinfo/>
+  <solution>Most modern Web browsers support the X-Frame-Options HTTP header. Ensure it's set on all web pages returned by your site (if you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY.  ALLOW-FROM allows specific websites to frame the web page in supported web browsers).
+	</solution>
+  <reference>http://blogs.msdn.com/b/ieinternals/archive/2010/03/30/combating-clickjacking-with-x-frame-options.aspx
+	</reference>
+</alertitem>
+<alertitem>
+  <pluginid>10016</pluginid>
+  <alert>Web Browser XSS Protection Not Enabled</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>Web Browser XSS Protection is not enabled, or is disabled by the configuration of the 'X-XSS-Protection' HTTP response header on the web server
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=F319E45FAAD7B9642E60368E3A297BEF?error</uri>
+  <param/>
+  <attack/>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+X-XSS-Protection: 1; mode=block
+X-XSS-Protection: 1; report=http://www.example.com/xss
+The following values would disable it:
+X-XSS-Protection: 0
+The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).</otherinfo>
+  <solution>Ensure that the web browser's XSS filter is enabled, by setting the X-XSS-Protection HTTP response header to '1'.
+	</solution>
+  <otherinfo>The X-XSS-Protection HTTP response header allows the web server to enable or disable the web browser's XSS protection mechanism. The following values would attempt to enable it: 
+	X-XSS-Protection: 1; mode=block
+	X-XSS-Protection: 1; report=http://www.example.com/xss
+	The following values would disable it:
+	X-XSS-Protection: 0
+	The X-XSS-Protection HTTP response header is currently supported on Internet Explorer, Chrome and Safari (WebKit).
+	Note that this alert is only raised if the response body could potentially contain an XSS payload (with a text-based content type, with a non-zero length).
+	</otherinfo>
+  <reference>https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
+	https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/
+	</reference>
+  <cweid>933</cweid>
+  <wascid>14</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10012</pluginid>
+  <alert>Password Autocomplete in browser</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>AUTOCOMPLETE attribute is not disabled in HTML FORM/INPUT element containing password type input.  Passwords may be stored in browsers and retrieved.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=F319E45FAAD7B9642E60368E3A297BEF?error</uri>
+  <param>input</param>
+  <attack/>
+  <evidence>&lt;input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name='password'&gt;</evidence>
+  <otherinfo/>
+  <solution>Turn off AUTOCOMPLETE attribute in form or individual input elements containing password by using AUTOCOMPLETE='OFF'
+	</solution>
+  <reference>http://msdn.microsoft.com/library/default.asp?url=/workshop/author/forms/autocomplete_ovr.asp
+	</reference>
+  <cweid>525</cweid>
+</alertitem>
+<alertitem>
+  <pluginid>3</pluginid>
+  <alert>Session ID in URL Rewrite</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>URL rewrite is used to track user session ID. The session ID may be disclosed via cross-site referer header. In addition, the session ID might be stored in browser history or server logs.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=F319E45FAAD7B9642E60368E3A297BEF?error</uri>
+  <param>jsessionid</param>
+  <attack>jsessionid=F319E45FAAD7B9642E60368E3A297BEF?error</attack>
+  <evidence>jsessionid=F319E45FAAD7B9642E60368E3A297BEF?error</evidence>
+  <otherinfo/>
+  <solution>For secure content, put session ID in a cookie. To be even more secure consider using a combination of cookie and URL rewrite.
+	</solution>
+  <reference>http://seclists.org/lists/webappsec/2002/Oct-Dec/0111.html
+	</reference>
+  <cweid>200</cweid>
+  <wascid>13</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10021</pluginid>
+  <alert>X-Content-Type-Options Header Missing</alert>
+  <riskcode>1</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Low (Medium)</riskdesc>
+  <desc>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=F319E45FAAD7B9642E60368E3A297BEF?error</uri>
+  <param/>
+  <attack/>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</otherinfo>
+  <solution>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.
+	If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.
+	</solution>
+  <otherinfo>This issue still applies to error type pages (401, 403, 500, etc) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.
+	</otherinfo>
+  <reference>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx
+	https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+	</reference>
+  <wascid>15</wascid>
+</alertitem>
+<alertitem>
+  <pluginid>10020</pluginid>
+  <alert>X-Frame-Options Header Not Set</alert>
+  <riskcode>2</riskcode>
+  <confidence>2</confidence>
+  <riskdesc>Medium (Medium)</riskdesc>
+  <desc>X-Frame-Options header is not included in the HTTP response to protect against 'ClickJacking' attacks.
+	</desc>
+  <uri>http://target/WebGoat/login.mvc;jsessionid=F319E45FAAD7B9642E60368E3A297BEF?error</uri>
+  <param/>
+  <attack/>
+  <otherinfo/>
+  <solution>Most modern Web browsers support the X-Frame-Options HTTP header. Ensure it's set on all web pages returned by your site (if you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY.  ALLOW-FROM allows specific websites to frame the web page in supported web browsers).
+	</solution>
+  <reference>http://blogs.msdn.com/b/ieinternals/archive/2010/03/30/combating-clickjacking-with-x-frame-options.aspx
+	</reference>
+</alertitem>
+</alerts></site></OWASPZAPReport>
